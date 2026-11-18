@@ -1,0 +1,2983 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="dashboard">
+  <meta name="design-style" content="canopy">
+  <title>NENA | Espaço de Comunicação e Carinho</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Canopy base surfaces & ink */
+      --background: #faf6ef;
+      --surface-container-low: #f0eae0;
+      --surface-container: #e8e0d2;
+      --surface-container-high: #ddd3c2;
+
+      --on-surface: #2a302b;
+      --on-surface-variant: #4a524b;
+
+      --outline: #737872;
+      --outline-variant: #cbc5b8;
+
+      --primary: #366948;
+      --on-primary: #ffffff;
+      --primary-container: #d8efe0;
+      --on-primary-container: #1f4d30;
+      --secondary: #5c635c;
+      --tertiary: #8f5822;
+      --tertiary-container: #f2d4a7;
+      --on-tertiary-container: #6e3f0c;
+      --error: #b83230;
+      --on-error: #ffffff;
+
+      /* Shared semantic tokens */
+      --positive: #28643e;
+      --warning: #995c16;
+      --focus: #366948;
+
+      /* Data series */
+      --data-1: #366948;
+      --data-2: #8f5822;
+      --data-3: #a85438;
+      --data-4: #4b6b78;
+      --data-context: #b5b0a3;
+
+      /* Communication & Need semantic colors (WCAG AA compliant) */
+      --card-white: #fffdf9;
+      --backdrop: rgb(42 48 43 / 0.56);
+
+      --sim-bg: #2b6841;
+      --sim-bg-hover: #215333;
+      --sim-tint: #dff2e5;
+      --nao-bg: #b83230;
+      --nao-bg-hover: #962523;
+      --nao-tint: #fbe4e3;
+
+      --need-agua: #236178;
+      --need-agua-tint: #e1f0f5;
+      --need-comida: #8f5822;
+      --need-comida-tint: #f8ebd9;
+      --need-xixi: #7d6214;
+      --need-xixi-tint: #f6eed4;
+      --need-coco: #694932;
+      --need-coco-tint: #efe5dc;
+      --need-frio: #355685;
+      --need-frio-tint: #e2ebf7;
+      --need-calor: #ad4923;
+      --need-calor-tint: #fae7df;
+      --need-dor: #a82e38;
+      --need-dor-tint: #fae3e5;
+      --need-sono: #4e4575;
+      --need-sono-tint: #eae7f4;
+
+      /* Illustration tokens */
+      --skin-light: #f6d5c1;
+      --skin-shadow: #e2b59b;
+      --cheek-rosy: #e69890;
+      --hair-silver: #e2e4e0;
+      --hair-silver-dark: #b6bbb4;
+      --headband-red: #c93333;
+      --headband-red-dark: #992121;
+      --blouse-lilac: #ceb9e6;
+      --blouse-lilac-dark: #a98ec9;
+      --flower-coral: #e4666a;
+      --flower-yellow: #f0be46;
+      --flower-teal: #49927a;
+
+      --quiz-red: #c93632;
+      --quiz-blue: #2d65a3;
+      --quiz-green: #2c784a;
+      --quiz-yellow: #d19b14;
+
+      --plant-pot: #b86a43;
+      --plant-pot-dark: #8c4c2c;
+      --leaf-light: #64a373;
+      --leaf-mid: #3c794e;
+      --leaf-dark: #234d30;
+      --petal-pink: #d8627a;
+      --petal-violet: #9066b3;
+      --petal-gold: #e6ab27;
+
+      --porcelain: #f8f5ef;
+      --porcelain-shadow: #dcd5c8;
+      --wood-brown: #7a5234;
+      --wood-dark: #543721;
+      --gold-bead: #c28a34;
+      --gold-bead-light: #e4b665;
+      --water-blue: #5aa3c4;
+      --water-light: #b6e0f2;
+      --sun-orange: #e38136;
+      --ice-blue: #6fa8d6;
+
+      /* Fonts */
+      --font-headline: 'Literata', serif;
+      --font-body: 'Nunito Sans', sans-serif;
+      --font-label: 'Geist Mono', monospace;
+
+      /* Type scale (Dashboard / Senior Accessible) */
+      --display-size: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+      --headline-size: clamp(1.3rem, 1.15rem + 0.5vw, 1.55rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
+      --body-size: clamp(1rem, 0.96rem + 0.18vw, 1.0625rem);
+      --label-size: 0.78rem;
+
+      /* Shape */
+      --rounded: 0.625rem;
+      --rounded-lg: 1rem;
+      --rounded-full: 9999px;
+
+      /* Effects */
+      --shadow-soft: 0 4px 20px rgb(42 48 43 / 0.06);
+      --shadow-soft-hover: 0 8px 28px rgb(42 48 43 / 0.11);
+      --border-soft: 1px solid rgb(203 197 184 / 0.75);
+      --focus-glow: 0 0 0 4px rgb(54 105 72 / 0.24);
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    header { position: static !important; }
+    button, input, select, textarea { font-family: inherit; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Accessible Focus Ring */
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      box-shadow: var(--focus-glow);
+    }
+
+    /* Main Container */
+    .app-shell {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: var(--space-lg) var(--space-lg) var(--space-2xl);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    /* Header */
+    .site-header {
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      border: var(--border-soft);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+
+    .avatar-control {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .avatar-frame {
+      width: 92px;
+      height: 92px;
+      border-radius: var(--rounded-full);
+      border: 4px solid var(--primary);
+      background: var(--card-white);
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-frame img,
+    .avatar-frame svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .avatar-actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .photo-upload-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      background: var(--surface-container);
+      color: var(--on-surface);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: var(--border-soft);
+      transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+
+    .photo-upload-btn:hover {
+      background: var(--surface-container-high);
+    }
+
+    .photo-reset-btn {
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: var(--space-xs) 0;
+      text-align: left;
+      min-height: 32px;
+    }
+
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .brand-kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--tertiary);
+    }
+
+    .brand-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      color: var(--on-surface);
+    }
+
+    .header-tools {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .tool-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 46px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-full);
+      border: var(--border-soft);
+      background: var(--card-white);
+      color: var(--on-surface);
+      font-weight: 700;
+      font-size: 0.9375rem;
+      cursor: pointer;
+      transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+
+    .tool-pill:hover {
+      background: var(--surface-container);
+    }
+
+    .tool-pill[aria-pressed="true"] {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      border-color: var(--primary);
+    }
+
+    /* 3-Column Main Dashboard Grid */
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 1.32fr) minmax(0, 1.05fr);
+      gap: var(--space-lg);
+      align-items: start;
+      width: 100%;
+    }
+    .page-grid * { min-width: 0; }
+
+    .column-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    /* Panels */
+    .panel {
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .panel.is-leaf-highlight {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .panel-kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--tertiary);
+    }
+
+    .is-leaf-highlight .panel-kicker {
+      color: var(--on-primary-container);
+    }
+
+    .panel-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--on-surface);
+    }
+
+    .is-leaf-highlight .panel-title {
+      color: var(--on-primary-container);
+    }
+
+    .panel-subtitle {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--on-surface-variant);
+    }
+
+    /* Left Column: Needs Grid */
+    .needs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .need-card {
+      appearance: none;
+      border: 2px solid transparent;
+      border-radius: var(--rounded-lg);
+      background: var(--card-white);
+      padding: var(--space-md) var(--space-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      cursor: pointer;
+      min-height: 148px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
+    }
+
+    .need-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft-hover);
+    }
+
+    .need-card:active {
+      transform: scale(0.97);
+    }
+
+    .need-card.is-active {
+      border-color: var(--primary);
+      background: var(--primary-container);
+    }
+
+    .need-visual {
+      width: 82px;
+      height: 82px;
+      border-radius: var(--rounded-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xs);
+      position: relative;
+    }
+
+    .need-visual svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .need-voice-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--rounded-full);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .need-label {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--on-surface);
+    }
+
+    .need-sublabel {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+
+    /* Need color accents */
+    .need-card[data-need="agua"] .need-visual { background: var(--need-agua-tint); }
+    .need-card[data-need="agua"] .need-label { color: var(--need-agua); }
+    .need-card[data-need="comida"] .need-visual { background: var(--need-comida-tint); }
+    .need-card[data-need="comida"] .need-label { color: var(--need-comida); }
+    .need-card[data-need="xixi"] .need-visual { background: var(--need-xixi-tint); }
+    .need-card[data-need="xixi"] .need-label { color: var(--need-xixi); }
+    .need-card[data-need="coco"] .need-visual { background: var(--need-coco-tint); }
+    .need-card[data-need="coco"] .need-label { color: var(--need-coco); }
+    .need-card[data-need="frio"] .need-visual { background: var(--need-frio-tint); }
+    .need-card[data-need="frio"] .need-label { color: var(--need-frio); }
+    .need-card[data-need="calor"] .need-visual { background: var(--need-calor-tint); }
+    .need-card[data-need="calor"] .need-label { color: var(--need-calor); }
+    .need-card[data-need="dor"] .need-visual { background: var(--need-dor-tint); }
+    .need-card[data-need="dor"] .need-label { color: var(--need-dor); }
+    .need-card[data-need="sono"] .need-visual { background: var(--need-sono-tint); }
+    .need-card[data-need="sono"] .need-label { color: var(--need-sono); }
+
+    /* Middle Column: SIM / NÃO */
+    .yes-no-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .btn-response {
+      appearance: none;
+      border: none;
+      border-radius: var(--rounded-lg);
+      min-height: 176px;
+      padding: var(--space-lg) var(--space-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+      cursor: pointer;
+      color: var(--on-primary);
+      box-shadow: var(--shadow-soft);
+      transition: transform var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);
+    }
+
+    .btn-response:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft-hover);
+    }
+
+    .btn-response:active {
+      transform: scale(0.97);
+    }
+
+    .btn-sim {
+      background: var(--sim-bg);
+    }
+    .btn-sim:hover {
+      background: var(--sim-bg-hover);
+    }
+
+    .btn-nao {
+      background: var(--nao-bg);
+    }
+    .btn-nao:hover {
+      background: var(--nao-bg-hover);
+    }
+
+    .thumb-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--rounded-full);
+      background: rgb(255 255 255 / 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md);
+    }
+
+    .thumb-circle svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .response-text {
+      font-family: var(--font-headline);
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Live Spoken Readout Banner */
+    .speech-banner {
+      background: var(--card-white);
+      border-radius: var(--rounded);
+      border-left: 5px solid var(--primary);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .speech-banner-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1 1 240px;
+    }
+
+    .speech-banner-kicker {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--tertiary);
+    }
+
+    .speech-banner-msg {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      line-height: 1.35;
+    }
+
+    .btn-repeat {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded);
+      border: var(--border-soft);
+      background: var(--surface-container);
+      color: var(--on-surface);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .btn-repeat:hover {
+      background: var(--surface-container-high);
+    }
+
+    /* Meu Teste Diário */
+    .quiz-panel {
+      background: var(--card-white);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      border: var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      position: relative;
+    }
+
+    .quiz-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .quiz-badge {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--rounded-full);
+      background: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+    }
+
+    .quiz-score-pill {
+      font-family: var(--font-label);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: var(--rounded-full);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    .quiz-question-btn {
+      appearance: none;
+      border: none;
+      background: var(--surface-container-low);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      min-height: 56px;
+      width: 100%;
+    }
+
+    .quiz-question-btn:hover {
+      background: var(--surface-container);
+    }
+
+    .quiz-question-text {
+      font-family: var(--font-headline);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      margin: 0;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .quiz-option-btn {
+      appearance: none;
+      border: 3px solid var(--outline-variant);
+      border-radius: var(--rounded-lg);
+      background: var(--surface-container-low);
+      padding: var(--space-lg) var(--space-md);
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      cursor: pointer;
+      transition: transform var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
+    }
+
+    .quiz-option-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+
+    .quiz-option-btn.is-correct {
+      border-color: var(--positive);
+      background: var(--primary-container);
+    }
+
+    .quiz-option-btn.is-try {
+      border-color: var(--warning);
+      background: var(--tertiary-container);
+    }
+
+    .quiz-swatch {
+      width: 72px;
+      height: 72px;
+      border-radius: var(--rounded);
+      border: 3px solid var(--card-white);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .quiz-math-num {
+      font-family: var(--font-headline);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      line-height: 1;
+    }
+
+    .quiz-visual-box {
+      width: 74px;
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quiz-visual-box svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .quiz-option-label {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+
+    .quiz-feedback {
+      min-height: 52px;
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      font-weight: 700;
+    }
+
+    .quiz-feedback.is-celebrate {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      animation: gentlePop var(--dur-long) var(--ease-out);
+    }
+
+    .quiz-feedback.is-gentle-retry {
+      background: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+    }
+
+    .quiz-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    /* Shared Buttons */
+    .btn-primary {
+      min-height: 46px;
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--rounded);
+      border: none;
+      background: var(--primary);
+      color: var(--on-primary);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+
+    .btn-primary:hover {
+      background: var(--sim-bg-hover);
+    }
+
+    .btn-primary.is-stop {
+      background: var(--nao-bg);
+    }
+
+    .btn-primary.is-stop:hover {
+      background: var(--nao-bg-hover);
+    }
+
+    .btn-secondary {
+      min-height: 46px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: var(--border-soft);
+      background: var(--surface-container);
+      color: var(--on-surface);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-container-high);
+    }
+
+    .btn-danger-outline {
+      min-height: 46px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--error);
+      background: var(--card-white);
+      color: var(--error);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+    }
+
+    .btn-danger-outline:hover,
+    .btn-danger-outline[data-armed="true"] {
+      background: var(--nao-tint);
+    }
+
+    /* Right Column: Santo Terço */
+    .mystery-box {
+      background: var(--card-white);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      border: var(--border-soft);
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .mystery-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--rounded-full);
+      background: var(--tertiary-container);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: var(--space-sm);
+    }
+
+    .mystery-label {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--tertiary);
+    }
+
+    .mystery-name {
+      margin: 2px 0 0;
+      font-weight: 700;
+      color: var(--on-surface);
+      font-size: 1rem;
+    }
+
+    /* Canopy Almanac / Rosary Bead Strip */
+    .rosary-strip {
+      background: var(--card-white);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      border: var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .rosary-strip-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .rosary-counter {
+      font-family: var(--font-label);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .bead-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .bead-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: var(--rounded-full);
+      border: 2px solid var(--outline-variant);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: transform var(--dur-micro) var(--ease-out), background-color var(--dur-short) var(--ease-out);
+    }
+
+    .bead-btn.is-large-bead {
+      width: 36px;
+      height: 36px;
+      border-color: var(--tertiary);
+    }
+
+    .bead-btn.is-done {
+      background: var(--tertiary-container);
+      border-color: var(--tertiary);
+      color: var(--on-tertiary-container);
+    }
+
+    .bead-btn.is-current {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--on-primary);
+      transform: scale(1.1);
+    }
+
+    .prayer-text-box {
+      background: var(--card-white);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      border-left: 4px solid var(--tertiary);
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: var(--on-surface);
+      min-height: 108px;
+    }
+
+    .rosary-controls {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .rosary-controls .btn-primary {
+      flex: 1 1 160px;
+    }
+
+    /* Right Column: Plantas */
+    .plant-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .plant-tab-btn {
+      min-height: 40px;
+      padding: 6px 12px;
+      border-radius: var(--rounded-full);
+      border: 1px solid rgb(31 77 48 / 0.25);
+      background: var(--card-white);
+      color: var(--on-surface);
+      font-weight: 700;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+
+    .plant-tab-btn[aria-selected="true"] {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .plant-feature-card {
+      appearance: none;
+      border: none;
+      border-radius: var(--rounded-lg);
+      background: var(--card-white);
+      padding: var(--space-md);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      width: 100%;
+      box-shadow: var(--shadow-soft);
+      transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);
+    }
+
+    .plant-feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft-hover);
+    }
+
+    .plant-art-wrap {
+      width: 100%;
+      height: 170px;
+      border-radius: var(--rounded);
+      background: var(--surface-container-low);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plant-art-wrap svg {
+      height: 100%;
+      width: auto;
+      max-width: 100%;
+    }
+
+    .plant-day-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: var(--rounded-full);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    .plant-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .plant-name {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+
+    .plant-speak-tag {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--rounded-full);
+      background: var(--surface-container-low);
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .plant-fact {
+      margin: 0;
+      font-size: 0.96rem;
+      line-height: 1.5;
+      color: var(--on-surface-variant);
+    }
+
+    .plant-care-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+
+    .plant-care-pill {
+      background: var(--surface-container-low);
+      border-radius: var(--rounded);
+      padding: var(--space-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .plant-care-pill span:first-child {
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--tertiary);
+    }
+
+    .plant-care-pill strong {
+      font-size: 0.88rem;
+      color: var(--on-surface);
+    }
+
+    /* Footer / Bottom Section: History Log + Caregiver Guide */
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: stretch;
+    }
+    .footer-grid * { min-width: 0; }
+
+    .log-panel {
+      background: var(--surface-container-low);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .log-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .log-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .log-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      max-height: 290px;
+      overflow-y: auto;
+    }
+
+    .log-item {
+      background: var(--card-white);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      border: var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .log-item.is-confirmed {
+      border-left: 4px solid var(--positive);
+      background: var(--background);
+    }
+
+    .log-item-main {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .log-time {
+      font-family: var(--font-label);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+    }
+
+    .log-cat {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: var(--rounded-full);
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+
+    .log-text {
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+
+    .log-status {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--rounded-full);
+      background: var(--tertiary-container);
+      color: var(--on-tertiary-container);
+    }
+
+    .log-status.is-ok {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    .log-empty {
+      background: var(--card-white);
+      border-radius: var(--rounded);
+      padding: var(--space-lg);
+      text-align: center;
+      color: var(--on-surface-variant);
+      border: var(--border-soft);
+    }
+
+    /* Caregiver Guide Card */
+    .guide-card {
+      background: var(--surface-container);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    .guide-highlights {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      color: var(--on-surface);
+      font-size: 0.95rem;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: var(--backdrop);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+      z-index: 100;
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .modal-dialog {
+      background: var(--background);
+      color: var(--on-surface);
+      border-radius: var(--rounded-lg);
+      max-width: 680px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-soft-hover);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-md);
+      border-bottom: var(--border-soft);
+      padding-bottom: var(--space-md);
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .guide-section {
+      background: var(--surface-container-low);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+    }
+
+    .guide-section h4 {
+      margin: 0 0 var(--space-xs);
+      font-family: var(--font-headline);
+      font-size: 1.1rem;
+      color: var(--primary);
+    }
+
+    .guide-section p,
+    .guide-section ul {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--on-surface);
+    }
+
+    .guide-section ul {
+      padding-left: 1.25rem;
+      margin-top: var(--space-xs);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    @keyframes gentlePop {
+      0% { transform: scale(0.97); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Responsive Rules */
+    @media (max-width: 1080px) {
+      .page-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+      .col-right {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-lg);
+      }
+      .footer-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .app-shell {
+        padding: var(--space-sm) var(--space-sm) var(--space-xl);
+      }
+      .page-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .col-right {
+        grid-column: auto;
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .col-middle {
+        order: -1;
+      }
+      .needs-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-sm);
+      }
+      .need-card {
+        min-height: 132px;
+      }
+      .btn-response {
+        min-height: 146px;
+      }
+      .modal-dialog {
+        padding: var(--space-lg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="brand-group">
+        <div class="avatar-control">
+          <div class="avatar-frame" id="avatar-frame" aria-label="Retrato da Nena">
+            <!-- Ilustração padrão: senhora simpática de cabelos curtos lisos e franja, tiara vermelha e blusa lilás floral -->
+            <svg viewBox="0 0 120 120" role="img" aria-label="Ilustração da Marlene com tiara vermelha e blusa lilás floral">
+              <rect width="120" height="120" fill="var(--primary-container)" />
+              <!-- Blusa lilás floral -->
+              <path d="M18 122 C20 94, 38 84, 60 84 C82 84, 100 94, 102 122 Z" fill="var(--blouse-lilac)" />
+              <path d="M44 85 Q60 98 76 85" fill="none" stroke="var(--blouse-lilac-dark)" stroke-width="3" stroke-linecap="round" />
+              <!-- Florzinhas coloridas na blusa -->
+              <g>
+                <circle cx="38" cy="103" r="3" fill="var(--flower-coral)" />
+                <circle cx="44" cy="103" r="3" fill="var(--flower-coral)" />
+                <circle cx="41" cy="99" r="3" fill="var(--flower-coral)" />
+                <circle cx="41" cy="107" r="3" fill="var(--flower-coral)" />
+                <circle cx="41" cy="103" r="2.2" fill="var(--flower-yellow)" />
+
+                <circle cx="77" cy="101" r="2.8" fill="var(--flower-teal)" />
+                <circle cx="83" cy="101" r="2.8" fill="var(--flower-teal)" />
+                <circle cx="80" cy="97" r="2.8" fill="var(--flower-teal)" />
+                <circle cx="80" cy="105" r="2.8" fill="var(--flower-teal)" />
+                <circle cx="80" cy="101" r="2" fill="var(--flower-yellow)" />
+
+                <circle cx="58" cy="111" r="2.6" fill="var(--flower-yellow)" />
+                <circle cx="63" cy="111" r="2.6" fill="var(--flower-yellow)" />
+                <circle cx="60.5" cy="107" r="2.6" fill="var(--flower-yellow)" />
+                <circle cx="60.5" cy="115" r="2.6" fill="var(--flower-yellow)" />
+                <circle cx="60.5" cy="111" r="2" fill="var(--flower-coral)" />
+              </g>
+              <!-- Pescoço -->
+              <rect x="51" y="72" width="18" height="16" rx="7" fill="var(--skin-shadow)" />
+              <!-- Cabelo atrás curto e liso -->
+              <path d="M25 56 C25 25, 95 25, 95 56 L93 77 C86 80, 82 72, 82 62 L38 62 C38 72, 34 80, 27 77 Z" fill="var(--hair-silver-dark)" />
+              <!-- Orelhas -->
+              <circle cx="33" cy="57" r="6" fill="var(--skin-shadow)" />
+              <circle cx="87" cy="57" r="6" fill="var(--skin-shadow)" />
+              <!-- Rosto -->
+              <ellipse cx="60" cy="55" rx="26" ry="28" fill="var(--skin-light)" />
+              <!-- Bochechas rosadas -->
+              <ellipse cx="43" cy="61" rx="5.5" ry="3.2" fill="var(--cheek-rosy)" opacity="0.65" />
+              <ellipse cx="77" cy="61" rx="5.5" ry="3.2" fill="var(--cheek-rosy)" opacity="0.65" />
+              <!-- Olhos simpáticos -->
+              <circle cx="49" cy="53" r="2.8" fill="var(--on-surface)" />
+              <circle cx="71" cy="53" r="2.8" fill="var(--on-surface)" />
+              <circle cx="50" cy="52" r="0.9" fill="var(--card-white)" />
+              <circle cx="72" cy="52" r="0.9" fill="var(--card-white)" />
+              <!-- Sobrancelhas suaves -->
+              <path d="M43 46 Q49 44 54 46" fill="none" stroke="var(--hair-silver-dark)" stroke-width="2" stroke-linecap="round" />
+              <path d="M66 46 Q71 44 77 46" fill="none" stroke="var(--hair-silver-dark)" stroke-width="2" stroke-linecap="round" />
+              <!-- Nariz delicado -->
+              <path d="M60 54 Q62 59 58 61" fill="none" stroke="var(--skin-shadow)" stroke-width="2" stroke-linecap="round" />
+              <!-- Sorriso acolhedor -->
+              <path d="M51 67 Q60 74 69 67" fill="none" stroke="var(--nao-bg)" stroke-width="2.6" stroke-linecap="round" />
+              <!-- Cabelo curto liso com franja reta suave -->
+              <path d="M30 51 C28 24, 92 24, 90 51 C88 43, 83 37, 79 35 L77 44 L67 43 L62 44 L54 43 L44 44 L41 36 C36 39, 32 45, 30 51 Z" fill="var(--hair-silver)" />
+              <!-- Tiara / Diadema vermelha -->
+              <path d="M32 40 C41 21, 79 21, 88 40" fill="none" stroke="var(--headband-red)" stroke-width="6.5" stroke-linecap="round" />
+              <path d="M35 37 C44 21, 76 21, 85 37" fill="none" stroke="var(--headband-red-dark)" stroke-width="1.5" stroke-linecap="round" opacity="0.5" />
+            </svg>
+          </div>
+          <div class="avatar-actions">
+            <label for="photo-input" class="photo-upload-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                <circle cx="12" cy="13" r="4" />
+              </svg>
+              Escolher foto
+            </label>
+            <input type="file" id="photo-input" accept="image/*" class="sr-only" onchange="handlePhotoUpload(this)">
+            <button type="button" id="photo-reset-btn" class="photo-reset-btn" onclick="resetAvatarIllustration()" hidden>
+              Usar ilustração da Nena
+            </button>
+          </div>
+        </div>
+
+        <div class="title-block">
+          <span class="brand-kicker">Espaço de Comunicação e Carinho</span>
+          <h1 class="brand-title">NENA</h1>
+        </div>
+      </div>
+
+      <div class="header-tools">
+        <button type="button" id="voice-toggle-btn" class="tool-pill" aria-pressed="true" onclick="toggleVoice()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+          </svg>
+          <span id="voice-toggle-label">Voz ativa</span>
+        </button>
+        <button type="button" class="tool-pill" onclick="openCaregiverModal()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+          Guia do Cuidador
+        </button>
+      </div>
+    </header>
+
+    <!-- 3-Column Dashboard Grid -->
+    <main class="page-grid">
+      <!-- Column 1: Left — Eu preciso de... -->
+      <section class="panel col-left" aria-labelledby="heading-needs">
+        <div class="panel-header">
+          <div>
+            <span class="panel-kicker">Comunicação Rápida</span>
+            <h2 id="heading-needs" class="panel-title">Eu preciso de…</h2>
+          </div>
+        </div>
+        <p class="panel-subtitle">Toque em um cartão para falar em voz alta e avisar quem está cuidando de você.</p>
+
+        <div class="needs-grid" id="needs-grid">
+          <!-- Água / Sede -->
+          <button type="button" class="need-card" data-need="agua" onclick="selectNeed('agua')">
+            <span class="need-voice-badge" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+            </span>
+            <span class="need-visual" aria-hidden="true">
+              <svg viewBox="0 0 80 80">
+                <path d="M22 14 L58 14 L52 68 C51.5 71 28.5 71 28 68 Z" fill="var(--porcelain)" stroke="var(--need-agua)" stroke-width="2.5" />
+                <path d="M25.5 34 Q40 30 54.5 34 L51 66 C50.5 68.5 29.5 68.5 29 66 Z" fill="var(--water-blue)" />
+                <ellipse cx="40" cy="34" rx="14.5" ry="3.5" fill="var(--water-light)" />
+                <path d="M31 24 L33 58" stroke="var(--card-white)" stroke-width="2.5" stroke-linecap="round" opacity="0.7" />
+                <path d="M62 24 C62 24 67 30 67 33 A5 5 0 1 1 57 33 C57 30 62 24 62 24 Z" fill="var(--water-blue)" />
+              </svg>
+            </span>
+            <span class="need-label">Água</span>
+            <span class="need-sublabel">Sede</span>
+          </button>
+
+          <!-- Comida / Fome -->
+          <button type="button" class="need-card" data-need="comida" onclick="selectNeed('comida')">
+            <span class="need-voice-badge" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+            </span>
+            <span class="need-visual" aria-hidden="true">
+              <svg viewBox="0 0 80 80">
+                <circle cx="42" cy="44" r="24" fill="var(--porcelain)" stroke="var(--outline)" stroke-width="2" />
+                <circle cx="42" cy="44" r="17" fill="var(--card-white)" stroke="var(--outline-variant)" stroke-width="1.5" />
+                <ellipse cx="36" cy="47" rx="8" ry="6" fill="var(--tertiary-container)" />
+                <circle cx="49" cy="40" r="5.5" fill="var(--leaf-mid)" />
+                <circle cx="47" cy="51" r="4.5" fill="var(--flower-coral)" />
+                <path d="M11 22 L11 36 M8 22 L8 31 Q11 35 14 31 L14 22 M11 36 L11 64" fill="none" stroke="var(--on-surface-variant)" stroke-width="2.3" stroke-linecap="round" />
+              </svg>
+            </span>
+            <span class="need-label">Comida</span>
+            <span class="need-sublabel">Fome</span>
+          </button>
+
+          <!-- Banheiro / Xixi -->
+          <button type="button" class="need-card" data-need="xixi" onclick="selectNeed('xixi')">
+            <span class="need-voice-badge" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+            </span>
+            <span class="need-visual" aria-hidden="true">
+              <svg viewBox="0 0 80 80">
+                <!-- Vaso sanitário limpo + gotinhas -->
+                <rect x="20" y="15" width="22" height="24" rx="4" fill="var(--porcelain)" stroke="var(--outline)" stroke-width="2" />
+                <rect x="24" y="20" width="6" height="3" rx="1.5" fill="var(--outline)" />
+                <path d="M22 39 L56 39 C56 54, 46 60, 42 60 L44 68 L24 68 L28 57 C23 54, 22 46, 22 39 Z" fill="var(--porcelain)" stroke="var(--outline)" stroke-width="2" />
+                <ellipse cx="40" cy="40" rx="16" ry="4" fill="var(--card-white)" stroke="var(--outline)" stroke-width="2" />
+                <path d="M62 21 C62 21 67 27 67 30 A5 5 0 1 1 57 30 C57 27 62 21 62 21 Z" fill="var(--flower-yellow)" stroke="var(--need-xixi)" stroke-width="1.5" />
+                <path d="M67 37 C67 37 70.5 41.5 70.5 43.8 A3.5 3.5 0 1 1 63.5 43.8 C63.5 41.5 67 37 67 37 Z" fill="var(--flower-yellow)" stroke="var(--need-xixi)" stroke-width="1.5" />
+              </svg>
+            </span>
+            <span class="need-label">Banheiro / Xixi</span>
+            <span class="need-sublabel">Urinar</span>
+          </button>
+
+          <!-- Banheiro / Cocô (vaso, papel higiênico e pequeno cocô ao lado) -->
+          <button type="button" class="need-card" data-need="coco" onclick="selectNeed('coco')">
+            <span class="need-voice-badge" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+            </span>
+            <span class="need-visual" aria-hidden="true">
+              <svg viewBox="0 0 80 80">
+                <!-- Vaso sanitário -->
+                <rect x="10" y="16" width="18" height="22" rx="3" fill="var(--porcelain)" stroke="var(--outline)" stroke-width="2" />
+                <path d="M12 38 L42 38 C42 52, 34 57, 30 57 L32 66 L14 66 L18 55 C13 52, 12 45, 12 38 Z" fill="var(--porcelain)" stroke="var(--outline)" stroke-width="2" />
+                <ellipse cx="28" cy="38.5" rx="14" ry="3.5" fill="var(--card-white)" stroke="var(--outline)" stroke-width="2" />
+                <!-- Rolo de papel higiênico -->
+                <rect x="49" y="14" width="18" height="19" rx="3" fill="var(--card-white)" stroke="var(--outline)" stroke-width="1.8" />
+                <ellipse cx="58" cy="14" rx="9" ry="3" fill="var(--porcelain-shadow)" stroke="var(--outline)" stroke-width="1.5" />
+                <ellipse cx="58" cy="14" rx="3" ry="1.2" fill="var(--outline)" />
+                <path d="M67 24 L67 40 L55 40 L55 33" fill="var(--card-white)" stroke="var(--outline)" stroke-width="1.6" />
+                <!-- Pequeno ícone de cocô ao lado -->
+                <g transform="translate(47, 47)">
+                  <path d="M12 2 C12 5, 8 6, 8 8 C5 8, 4 11, 5 13 C2 14, 2 19, 6 19 L19 19 C23 19, 23 14, 20 13 C21 10, 18 8, 15 8 C15 6, 14 3, 12 2 Z" fill="var(--wood-brown)" stroke="var(--wood-dark)" stroke-width="1.5" />
+                  <circle cx="10" cy="14" r="1.2" fill="var(--card-white)" />
+                  <circle cx="15" cy="14" r="1.2" fill="var(--card-white)" />
+                </g>
+              </svg>
+            </span>
+            <span class="need-label">Banheiro / Cocô</span>
+            <span class="need-sublabel">Evacuar</span>
+          </button>
+
+          <!-- Frio (cobertor realista + floco/frio) -->
+          <button type="button" class="need-card" data-need="frio" onclick="selectNeed('frio')">
+            <span class="need-voice-badge" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+            </span>
+            <span class="need-visual" aria-hidden="true">
+              <svg viewBox="0 0 80 80">
+                <!-- Cobertor macio dobrado -->
+                <rect x="13" y="34" width="54" height="32" rx="7" fill="var(--need-frio)" />
+                <path d="M13 44 L67 44 M13 54 L67 54" stroke="var(--need-frio-tint)" stroke-width="3" opacity="0.7" />
+                <path d="M26 34 L26 66 M44 34 L44 66" stroke="var(--ice-blue)" stroke-width="2.5" opacity="0.6" />
+                <rect x="13" y="31" width="54" height="9" rx="4.5" fill="var(--need-frio-tint)" stroke="var(--need-frio)" stroke-width="2" />
+                <!-- Floco de frio acima -->
+                <g stroke="var(--need-frio)" stroke-width="2.2" stroke-linecap="round">
+                  <line x1="40" y1="10" x2="40" y2="26" />
+                  <line x1="32" y1="18" x2="48" y2="18" />
+                  <line x1="34.5" y1="12.5" x2="45.5" y2="23.5" />
+                  <line x1="45.5" y1="12.5" x2="34.5" y2="23.5" />
+                </g>
+              </svg>
+            </span>
+            <span class="need-label">Frio</span>
+            <span class="need-sublabel">Cobertor</span>
+          </button>
+
+          <!-- Calor -->
+          <button type="button" class="need-card" data-need="calor" onclick="selectNeed('calor')">
+            <span class="need-voice-badge" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+            </span>
+            <span class="need-visual" aria-hidden="true">
+              <svg viewBox="0 0 80 80">
+                <circle cx="40" cy="36" r="15" fill="var(--petal-gold)" stroke="var(--sun-orange)" stroke-width="2.5" />
+                <g stroke="var(--sun-orange)" stroke-width="2.8" stroke-linecap="round">
+                  <line x1="40" y1="11" x2="40" y2="16" />
+                  <line x1="40" y1="56" x2="40" y2="61" />
+                  <line x1="15" y1="36" x2="20" y2="36" />
+                  <line x1="60" y1="36" x2="65" y2="36" />
+                  <line x1="22" y1="18" x2="26" y2="22" />
+                  <line x1="54" y1="50" x2="58" y2="54" />
+                  <line x1="58" y1="18" x2="54" y2="22" />
+                  <line x1="26" y1="50" x2="22" y2="54" />
+                </g>
+                <path d="M22 66 Q31 62 40 66 T58 66" fill="none" stroke="var(--need-calor)" stroke-width="2.5" stroke-linecap="round" />
+              </svg>
+            </span>
+            <span class="need-label">Calor</span>
+            <span class="need-sublabel">Refrescar</span>
+          </button>
+
+          <!-- Dor -->
+          <button type="button" class="need-card" data-need="dor" onclick="selectNeed('dor')">
+            <span class="need-voice-badge" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+            </span>
+            <span class="need-visual" aria-hidden="true">
+              <svg viewBox="0 0 80 80">
+                <circle cx="40" cy="40" r="24" fill="var(--card-white)" stroke="var(--need-dor)" stroke-width="2.5" />
+                <rect x="35" y="23" width="10" height="34" rx="3" fill="var(--need-dor)" />
+                <rect x="23" y="35" width="34" height="10" rx="3" fill="var(--need-dor)" />
+                <path d="M15 20 L21 25 M65 20 L59 25" stroke="var(--need-dor)" stroke-width="2.5" stroke-linecap="round" />
+              </svg>
+            </span>
+            <span class="need-label">Dor</span>
+            <span class="need-sublabel">Desconforto</span>
+          </button>
+
+          <!-- Sono -->
+          <button type="button" class="need-card" data-need="sono" onclick="selectNeed('sono')">
+            <span class="need-voice-badge" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+            </span>
+            <span class="need-visual" aria-hidden="true">
+              <svg viewBox="0 0 80 80">
+                <!-- Travesseiro macio -->
+                <path d="M16 44 Q40 40 64 44 Q67 54 64 62 Q40 65 16 62 Q13 54 16 44 Z" fill="var(--card-white)" stroke="var(--need-sono)" stroke-width="2.4" />
+                <!-- Lua crescente -->
+                <path d="M36 15 A14 14 0 1 0 52 33 A11 11 0 1 1 36 15 Z" fill="var(--petal-gold)" stroke="var(--tertiary)" stroke-width="1.5" />
+                <text x="53" y="26" font-family="var(--font-headline)" font-size="13" font-weight="700" fill="var(--need-sono)">Zzz</text>
+              </svg>
+            </span>
+            <span class="need-label">Sono</span>
+            <span class="need-sublabel">Descansar</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Column 2: Middle — SIM / NÃO + Meu Teste Diário -->
+      <div class="column-stack col-middle">
+        <section class="panel" aria-labelledby="heading-responses">
+          <div class="panel-header">
+            <div>
+              <span class="panel-kicker">Respostas Diretas</span>
+              <h2 id="heading-responses" class="panel-title">Responder Agora</h2>
+            </div>
+          </div>
+
+          <div class="yes-no-grid">
+            <!-- SIM com polegar para cima -->
+            <button type="button" class="btn-response btn-sim" onclick="selectYesNo('SIM')">
+              <span class="thumb-circle" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.8V11c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83v7.84C7 18.95 8.05 20 9.34 20h8.11c.7 0 1.36-.37 1.72-.97l2.66-6.15z" />
+                </svg>
+              </span>
+              <span class="response-text">
+                SIM
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                </svg>
+              </span>
+            </button>
+
+            <!-- NÃO com polegar apontando para baixo (oposto ao SIM) -->
+            <button type="button" class="btn-response btn-nao" onclick="selectYesNo('NÃO')">
+              <span class="thumb-circle" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.8V13c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V6.34C17 5.05 15.95 4 14.66 4H6.55c-.7 0-1.36.37-1.72.97l-2.66 6.15z" />
+                </svg>
+              </span>
+              <span class="response-text">
+                NÃO
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          <div class="speech-banner" aria-live="polite">
+            <div class="speech-banner-text">
+              <span class="speech-banner-kicker">Mensagem falada agora</span>
+              <p id="spoken-message" class="speech-banner-msg">Toque em qualquer cartão ou em SIM / NÃO. Eu falo por você.</p>
+            </div>
+            <button type="button" class="btn-repeat" onclick="repeatLastSpeech()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="23 4 23 10 17 10" />
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+              </svg>
+              Repetir
+            </button>
+          </div>
+        </section>
+
+        <!-- Meu Teste Diário -->
+        <section class="panel" aria-labelledby="heading-quiz">
+          <div class="panel-header">
+            <div>
+              <span class="panel-kicker">Exercício Cognitivo Suave</span>
+              <h2 id="heading-quiz" class="panel-title">Meu Teste Diário</h2>
+            </div>
+            <span class="quiz-score-pill" id="quiz-score-pill">Acertos hoje: 0</span>
+          </div>
+
+          <div class="quiz-panel">
+            <div class="quiz-meta-row">
+              <span class="quiz-badge" id="quiz-category-badge">Matemática</span>
+              <span class="rosary-counter" id="quiz-step-label">Desafio 1 de 9</span>
+            </div>
+
+            <button type="button" class="quiz-question-btn" onclick="speakCurrentQuizQuestion()" title="Ouvir pergunta">
+              <p id="quiz-question-text" class="quiz-question-text">Quanto é 1 + 1?</p>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+            </button>
+
+            <div class="quiz-options" id="quiz-options"></div>
+
+            <div class="quiz-feedback" id="quiz-feedback" aria-live="polite">
+              <span>Toque na resposta certa com tranquilidade.</span>
+            </div>
+
+            <div class="quiz-actions">
+              <button type="button" class="btn-secondary" onclick="speakCurrentQuizQuestion()">Ouvir pergunta</button>
+              <button type="button" class="btn-primary" onclick="nextQuizChallenge()">Próximo desafio</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Column 3: Right — Santo Terço + Plantas -->
+      <div class="column-stack col-right">
+        <!-- Santo Terço -->
+        <section class="panel" aria-labelledby="heading-rosary">
+          <div class="panel-header">
+            <div>
+              <span class="panel-kicker">Fé e Acolhimento</span>
+              <h2 id="heading-rosary" class="panel-title">Santo Terço</h2>
+            </div>
+          </div>
+
+          <div class="mystery-box">
+            <div class="mystery-icon" aria-hidden="true">
+              <svg viewBox="0 0 40 40">
+                <circle cx="20" cy="14" r="5" fill="var(--gold-bead)" />
+                <path d="M11 33 C11 24, 29 24, 29 33" fill="none" stroke="var(--gold-bead)" stroke-width="2.8" stroke-linecap="round" />
+                <line x1="20" y1="3" x2="20" y2="23" stroke="var(--tertiary)" stroke-width="3" stroke-linecap="round" />
+                <line x1="13" y1="10" x2="27" y2="10" stroke="var(--tertiary)" stroke-width="3" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div>
+              <span class="mystery-label" id="mystery-day-label">Mistérios de hoje</span>
+              <p class="mystery-name" id="mystery-name">Mistérios Gozosos</p>
+            </div>
+          </div>
+
+          <div class="rosary-strip">
+            <div class="rosary-strip-header">
+              <span class="mystery-label">Contas da dezena</span>
+              <span class="rosary-counter" id="rosary-progress-text">Início (Sinal da Cruz)</span>
+            </div>
+            <div class="bead-row" id="rosary-beads"></div>
+          </div>
+
+          <div class="prayer-text-box" id="prayer-text-box" aria-live="polite">
+            Em nome do Pai, do Filho e do Espírito Santo. Amém.
+          </div>
+
+          <div class="rosary-controls">
+            <button type="button" id="rosary-play-btn" class="btn-primary" onclick="toggleRosaryPrayer()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+              <span id="rosary-play-label">Rezar o terço</span>
+            </button>
+            <button type="button" class="btn-secondary" onclick="stepRosaryBead()">Próxima conta</button>
+            <button type="button" class="btn-secondary" onclick="resetRosary()">Reiniciar</button>
+          </div>
+        </section>
+
+        <!-- Plantas (Highlighted canopy leaf card) -->
+        <section class="panel is-leaf-highlight" aria-labelledby="heading-plants">
+          <div class="panel-header">
+            <div>
+              <span class="panel-kicker">Jardim de Carinho</span>
+              <h2 id="heading-plants" class="panel-title">Plantas</h2>
+            </div>
+          </div>
+
+          <div class="plant-tabs" role="tablist" aria-label="Escolher planta" id="plant-tabs"></div>
+
+          <button type="button" class="plant-feature-card" id="plant-feature-card" onclick="speakSelectedPlant()">
+            <div class="plant-art-wrap" id="plant-art-wrap"></div>
+            <div class="plant-title-row">
+              <h3 class="plant-name" id="plant-name">Bromélia</h3>
+              <span class="plant-speak-tag">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                </svg>
+                <span id="plant-speak-status">Ouvir curiosidade</span>
+              </span>
+            </div>
+            <p class="plant-fact" id="plant-fact"></p>
+            <div class="plant-care-grid">
+              <div class="plant-care-pill">
+                <span>Luz ideal</span>
+                <strong id="plant-light"></strong>
+              </div>
+              <div class="plant-care-pill">
+                <span>Rega</span>
+                <strong id="plant-water"></strong>
+              </div>
+            </div>
+          </button>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer: Pedidos e respostas recentes + Guia do Cuidador -->
+    <footer class="footer-grid">
+      <section class="log-panel" aria-labelledby="heading-log">
+        <div class="log-top-bar">
+          <div>
+            <span class="panel-kicker">Acompanhamento do Dia</span>
+            <h2 id="heading-log" class="panel-title">Pedidos e respostas recentes</h2>
+          </div>
+          <div class="log-actions">
+            <button type="button" class="btn-primary" onclick="confirmPendingLogs()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Confirmar
+            </button>
+            <button type="button" id="clear-logs-btn" class="btn-danger-outline" data-armed="false" onclick="clearLogs(this)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="3 6 5 6 21 6" />
+                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+              </svg>
+              Limpar Registros
+            </button>
+          </div>
+        </div>
+
+        <ul class="log-list" id="log-list" aria-live="polite"></ul>
+      </section>
+
+      <aside class="guide-card" aria-labelledby="heading-guide-card">
+        <div>
+          <span class="panel-kicker">Apoio Familiar</span>
+          <h2 id="heading-guide-card" class="panel-title">Guia do Cuidador</h2>
+          <p class="panel-subtitle" style="margin-top: var(--space-xs);">
+            Orientações práticas para usar este painel com acolhimento, paciência e clareza junto à Nena.
+          </p>
+        </div>
+        <ul class="guide-highlights">
+          <li>Deixe o volume do dispositivo confortável para que ela ouça cada cartão falado.</li>
+          <li>Use <strong>Confirmar</strong> sempre que atender a um pedido para manter o histórico organizado.</li>
+          <li>No <strong>Teste Diário</strong>, celebre cada acerto sem pressa nos erros.</li>
+        </ul>
+        <button type="button" class="btn-primary" onclick="openCaregiverModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+          </svg>
+          Abrir Guia do Cuidador
+        </button>
+      </aside>
+    </footer>
+  </div>
+
+  <!-- Modal: Guia do Cuidador -->
+  <div id="caregiver-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-guide-title" onclick="handleModalBackdropClick(event)">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span class="panel-kicker">Manual de Cuidado e Carinho</span>
+          <h2 id="modal-guide-title" class="panel-title">Guia do Cuidador — NENA</h2>
+        </div>
+        <button type="button" class="btn-secondary" onclick="closeCaregiverModal()" aria-label="Fechar guia">
+          Fechar
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="guide-section">
+          <h4>1. Comunicação com calma e respeito</h4>
+          <p>Posicione a tela na altura dos olhos da Nena, em local bem iluminado. Após cada toque em <strong>SIM</strong>, <strong>NÃO</strong> ou nos cartões de <strong>Eu preciso de…</strong>, aguarde a leitura em voz alta terminar e valide o que ela expressou olhando nos olhos.</p>
+        </div>
+
+        <div class="guide-section">
+          <h4>2. Registro de pedidos e confirmação</h4>
+          <ul>
+            <li>Cada pedido gera um horário em <strong>Pedidos e respostas recentes</strong>.</li>
+            <li>Ao atender (por exemplo, oferecer água ou levar ao banheiro), toque em <strong>Confirmar</strong> para registrar que a solicitação foi atendida.</li>
+            <li>Você pode exportar um resumo do dia ou limpar os registros antigos quando iniciar um novo turno.</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>3. Estímulo suave com Teste Diário, Terço e Plantas</h4>
+          <p>Faça de 2 a 3 desafios no <strong>Meu Teste Diário</strong> no período em que ela estiver mais descansada. O <strong>Santo Terço</strong> e as curiosidades das <strong>Plantas</strong> oferecem acolhimento emocional e conversa afetiva.</p>
+        </div>
+
+        <div class="quiz-actions" style="margin-top: var(--space-xs);">
+          <button type="button" class="btn-secondary" onclick="exportLogsCsv()">
+            Exportar registros do dia (.csv)
+          </button>
+          <button type="button" class="btn-primary" onclick="closeCaregiverModal()">
+            Entendido, voltar ao painel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <api-shim></api-shim>
+
+  <script>
+    const NEEDS_DATA = {
+      agua: {
+        label: `Água`,
+        speech: `Eu preciso de água. Estou com sede.`
+      },
+      comida: {
+        label: `Comida`,
+        speech: `Eu preciso de comida. Estou com fome.`
+      },
+      xixi: {
+        label: `Banheiro / Xixi`,
+        speech: `Eu preciso ir ao banheiro fazer xixi.`
+      },
+      coco: {
+        label: `Banheiro / Cocô`,
+        speech: `Eu preciso ir ao banheiro fazer cocô.`
+      },
+      frio: {
+        label: `Frio`,
+        speech: `Eu preciso me aquecer. Estou com frio.`
+      },
+      calor: {
+        label: `Calor`,
+        speech: `Eu preciso me refrescar. Estou com calor.`
+      },
+      dor: {
+        label: `Dor`,
+        speech: `Eu estou sentindo dor. Preciso de ajuda.`
+      },
+      sono: {
+        label: `Sono`,
+        speech: `Eu preciso descansar. Estou com sono.`
+      }
+    };
+
+    const QUIZ_CHALLENGES = [
+      {
+        id: `m1`,
+        category: `Matemática`,
+        question: `Quanto é 1 + 1?`,
+        options: [
+          { type: `math`, value: `2`, label: `2`, correct: true },
+          { type: `math`, value: `4`, label: `4`, correct: false }
+        ]
+      },
+      {
+        id: `a1`,
+        category: `Animais`,
+        question: `Qual destes animais faz "Miau"?`,
+        options: [
+          { type: `animal`, value: `gato`, label: `Gato`, correct: true },
+          { type: `animal`, value: `cachorro`, label: `Cachorro`, correct: false }
+        ]
+      },
+      {
+        id: `c1`,
+        category: `Cores`,
+        question: `Qual destas cores é o vermelho?`,
+        options: [
+          { type: `color`, value: `var(--quiz-red)`, label: `Vermelho`, correct: true },
+          { type: `color`, value: `var(--quiz-blue)`, label: `Azul`, correct: false }
+        ]
+      },
+      {
+        id: `m2`,
+        category: `Matemática`,
+        question: `Quanto é 2 + 1?`,
+        options: [
+          { type: `math`, value: `5`, label: `5`, correct: false },
+          { type: `math`, value: `3`, label: `3`, correct: true }
+        ]
+      },
+      {
+        id: `a2`,
+        category: `Animais`,
+        question: `Qual destes animais vive na água?`,
+        options: [
+          { type: `animal`, value: `peixe`, label: `Peixe`, correct: true },
+          { type: `animal`, value: `passaro`, label: `Pássaro`, correct: false }
+        ]
+      },
+      {
+        id: `c2`,
+        category: `Cores`,
+        question: `Qual destas cores é o verde?`,
+        options: [
+          { type: `color`, value: `var(--quiz-yellow)`, label: `Amarelo`, correct: false },
+          { type: `color`, value: `var(--quiz-green)`, label: `Verde`, correct: true }
+        ]
+      },
+      {
+        id: `m3`,
+        category: `Matemática`,
+        question: `Quanto é 2 + 2?`,
+        options: [
+          { type: `math`, value: `4`, label: `4`, correct: true },
+          { type: `math`, value: `1`, label: `1`, correct: false }
+        ]
+      },
+      {
+        id: `a3`,
+        category: `Animais`,
+        question: `Qual destes animais tem asas e voa?`,
+        options: [
+          { type: `animal`, value: `tartaruga`, label: `Tartaruga`, correct: false },
+          { type: `animal`, value: `borboleta`, label: `Borboleta`, correct: true }
+        ]
+      },
+      {
+        id: `c3`,
+        category: `Cores`,
+        question: `Qual destas cores é o azul?`,
+        options: [
+          { type: `color`, value: `var(--quiz-blue)`, label: `Azul`, correct: true },
+          { type: `color`, value: `var(--quiz-red)`, label: `Vermelho`, correct: false }
+        ]
+      }
+    ];
+
+    const TERCO_PRAYERS = [
+      {
+        title: `Sinal da Cruz`,
+        isLarge: true,
+        text: `Em nome do Pai, do Filho e do Espírito Santo. Amém.`
+      },
+      {
+        title: `Pai Nosso`,
+        isLarge: true,
+        text: `Pai nosso, que estais nos céus, santificado seja o vosso nome. Venha a nós o vosso reino. Seja feita a vossa vontade, assim na terra como no céu. O pão nosso de cada dia nos dai hoje. Perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido. E não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.`
+      },
+      {
+        title: `Ave Maria`,
+        isLarge: false,
+        text: `Ave Maria, cheia de graça, o Senhor é convosco. Bendita sois vós entre as mulheres, e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós, pecadores, agora e na hora da nossa morte. Amém.`
+      },
+      {
+        title: `Glória ao Pai`,
+        isLarge: true,
+        text: `Glória ao Pai, ao Filho e ao Espírito Santo. Como era no princípio, agora e sempre. Amém.`
+      }
+    ];
+
+    const PLANTS_DATA = [
+      {
+        id: `bromelia`,
+        name: `Bromélia`,
+        light: `Luz suave`,
+        water: `No copinho central`,
+        fact: `Esta é a bromélia. Ela tem folhas firmes em formato de roseta e uma flor colorida no centro. Curiosidade: na natureza, suas folhas formam um pequeno reservatório que guarda água da chuva como um copinho.`
+      },
+      {
+        id: `orquidea`,
+        name: `Orquídea`,
+        light: `Claridade sem sol`,
+        water: `1 vez por semana`,
+        fact: `Esta é a orquídea. Suas flores são delicadas e podem durar muitas semanas abertas. Curiosidade: muitas orquídeas gostam de respirar pelas raízes, usando cascas de árvore em vez de terra comum.`
+      },
+      {
+        id: `samambaia`,
+        name: `Samambaia`,
+        light: `Sombra iluminada`,
+        water: `Terra úmida`,
+        fact: `Esta é a samambaia. Suas folhas verdes caem como uma cascata refrescante. Curiosidade: ela é uma das plantas mais antigas da Terra e ajuda a deixar o ar da casa mais úmido e agradável.`
+      },
+      {
+        id: `girassol`,
+        name: `Girassol`,
+        light: `Sol pleno`,
+        water: `Rega regular`,
+        fact: `Este é o girassol. Lembra alegria, força e esperança. Curiosidade: enquanto é jovem, o botão do girassol acompanha o movimento do sol de leste a oeste ao longo do dia.`
+      }
+    ];
+
+    const FEMALE_VOICE_HINTS = [`maria`, `francisca`, `luciana`, `lúcia`, `lucia`, `camila`, `antonia`, `rita`, `zira`, `samantha`, `tessa`, `fable`, `aria`, `jenny`, `female`, `mulher`, `feminino`, `google`];
+    const MALE_VOICE_HINTS = [`jorge`, `ricardo`, `daniel`, `diego`, `paulo`, `male`, `homem`, `masculino`];
+
+    let appState = {
+      voiceEnabled: true,
+      lastMessage: `Toque em qualquer cartão ou em SIM / NÃO. Eu falo por você.`,
+      quizIndex: 0,
+      quizSolvedToday: 0,
+      rosaryStep: 0,
+      selectedPlantIndex: 0,
+      logs: []
+    };
+
+    let prayingRosary = false;
+    let rosaryStopFlag = false;
+    let currentObjectUrl = null;
+    const defaultAvatarHtml = document.getElementById(`avatar-frame`) ? document.getElementById(`avatar-frame`).innerHTML : ``;
+
+    function getRosarySequence() {
+      const seq = [
+        { label: `Cruz`, isLarge: true, prayer: TERCO_PRAYERS[0] },
+        { label: `PN`, isLarge: true, prayer: TERCO_PRAYERS[1] }
+      ];
+      for (let i = 1; i <= 10; i++) {
+        seq.push({ label: String(i), isLarge: false, prayer: TERCO_PRAYERS[2] });
+      }
+      seq.push({ label: `Gl`, isLarge: true, prayer: TERCO_PRAYERS[3] });
+      return seq;
+    }
+
+    const ROSARY_SEQUENCE = getRosarySequence();
+
+    function pickBestVoice() {
+      if (typeof window === `undefined` || !(`speechSynthesis` in window)) return null;
+      const voices = window.speechSynthesis.getVoices();
+      const ptVoices = voices.filter(function(v) { return v.lang && v.lang.toLowerCase().startsWith(`pt`); });
+      const pool = ptVoices.length ? ptVoices : voices;
+      const norm = function(v) { return (v.name + ` ` + v.voiceURI).toLowerCase(); };
+      return (
+        pool.find(function(v) { const n = norm(v); return n.includes(`google`) && n.includes(`pt`); }) ||
+        pool.find(function(v) { const n = norm(v); return FEMALE_VOICE_HINTS.some(function(h) { return n.includes(h); }) && !MALE_VOICE_HINTS.some(function(h) { return n.includes(h); }); }) ||
+        pool[0] ||
+        null
+      );
+    }
+
+    function speakText(text, onEnd) {
+      if (!appState.voiceEnabled || typeof window === `undefined` || !(`speechSynthesis` in window)) {
+        if (onEnd) setTimeout(onEnd, 400);
+        return;
+      }
+      try {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = `pt-BR`;
+        utterance.rate = 0.85;
+        const voice = pickBestVoice();
+        if (voice) utterance.voice = voice;
+        if (onEnd) utterance.onend = onEnd;
+        window.speechSynthesis.speak(utterance);
+      } catch (e) {
+        if (onEnd) onEnd();
+      }
+    }
+
+    async function persistState() {
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+          await window.notebookAppApi.setAppState({
+            voiceEnabled: Boolean(appState.voiceEnabled),
+            lastMessage: String(appState.lastMessage || ``),
+            quizIndex: Number(appState.quizIndex || 0),
+            quizSolvedToday: Number(appState.quizSolvedToday || 0),
+            rosaryStep: Number(appState.rosaryStep || 0),
+            selectedPlantIndex: Number(appState.selectedPlantIndex || 0),
+            logs: Array.isArray(appState.logs) ? appState.logs.slice(0, 40) : []
+          });
+        }
+      } catch (err) {
+        // Silent fallback if outside host container
+      }
+    }
+
+    function formatNowTime() {
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, `0`);
+      const mm = String(now.getMinutes()).padStart(2, `0`);
+      return hh + `:` + mm;
+    }
+
+    function addLogEntry(category, text) {
+      const entry = {
+        id: String(Date.now()) + `-` + String(Math.floor(Math.random() * 1000)),
+        time: formatNowTime(),
+        category: category,
+        text: text,
+        confirmed: false,
+        confirmedAt: ``
+      };
+      appState.logs.unshift(entry);
+      if (appState.logs.length > 40) appState.logs.length = 40;
+      renderLogs();
+      persistState();
+    }
+
+    function updateSpokenBanner(msg) {
+      appState.lastMessage = msg;
+      const el = document.getElementById(`spoken-message`);
+      if (el) el.textContent = msg;
+    }
+
+    function selectNeed(needKey) {
+      const need = NEEDS_DATA[needKey];
+      if (!need) return;
+      const cards = document.querySelectorAll(`.need-card`);
+      cards.forEach(function(c) {
+        c.classList.toggle(`is-active`, c.getAttribute(`data-need`) === needKey);
+      });
+      updateSpokenBanner(need.speech);
+      speakText(need.speech);
+      addLogEntry(`Pedido`, need.label + ` — "` + need.speech + `"`);
+    }
+
+    function selectYesNo(answer) {
+      const speech = answer === `SIM` ? `Sim!` : `Não!`;
+      updateSpokenBanner(speech);
+      speakText(speech);
+      addLogEntry(`Resposta`, answer);
+    }
+
+    function repeatLastSpeech() {
+      if (appState.lastMessage) speakText(appState.lastMessage);
+    }
+
+    function toggleVoice() {
+      appState.voiceEnabled = !appState.voiceEnabled;
+      if (!appState.voiceEnabled && typeof window !== `undefined` && `speechSynthesis` in window) {
+        window.speechSynthesis.cancel();
+      }
+      renderVoiceButton();
+      persistState();
+    }
+
+    function renderVoiceButton() {
+      const btn = document.getElementById(`voice-toggle-btn`);
+      const label = document.getElementById(`voice-toggle-label`);
+      if (btn) btn.setAttribute(`aria-pressed`, appState.voiceEnabled ? `true` : `false`);
+      if (label) label.textContent = appState.voiceEnabled ? `Voz ativa` : `Voz pausada`;
+    }
+
+    /* Avatar Photo Upload */
+    function handlePhotoUpload(input) {
+      const file = input && input.files && input.files[0];
+      if (!file) return;
+      const frame = document.getElementById(`avatar-frame`);
+      const resetBtn = document.getElementById(`photo-reset-btn`);
+      if (!frame) return;
+      if (currentObjectUrl) {
+        URL.revokeObjectURL(currentObjectUrl);
+      }
+      currentObjectUrl = URL.createObjectURL(file);
+      frame.innerHTML = ``;
+      const img = document.createElement(`img`);
+      img.src = currentObjectUrl;
+      img.alt = `Foto escolhida da Nena`;
+      frame.appendChild(img);
+      if (resetBtn) resetBtn.hidden = false;
+    }
+
+    function resetAvatarIllustration() {
+      const frame = document.getElementById(`avatar-frame`);
+      const resetBtn = document.getElementById(`photo-reset-btn`);
+      const input = document.getElementById(`photo-input`);
+      if (currentObjectUrl) {
+        URL.revokeObjectURL(currentObjectUrl);
+        currentObjectUrl = null;
+      }
+      if (frame) frame.innerHTML = defaultAvatarHtml;
+      if (resetBtn) resetBtn.hidden = true;
+      if (input) input.value = ``;
+    }
+
+    /* Meu Teste Diário */
+    function getAnimalSvg(animalKey) {
+      if (animalKey === `gato`) {
+        return `<svg viewBox="0 0 80 80" aria-hidden="true">
+          <polygon points="18,32 22,12 36,24" fill="var(--tertiary-container)" stroke="var(--tertiary)" stroke-width="2.5" />
+          <polygon points="62,32 58,12 44,24" fill="var(--tertiary-container)" stroke="var(--tertiary)" stroke-width="2.5" />
+          <circle cx="40" cy="46" r="22" fill="var(--tertiary-container)" stroke="var(--tertiary)" stroke-width="2.5" />
+          <circle cx="32" cy="43" r="3" fill="var(--on-surface)" />
+          <circle cx="48" cy="43" r="3" fill="var(--on-surface)" />
+          <polygon points="37,49 43,49 40,53" fill="var(--flower-coral)" />
+          <path d="M16 48 L28 49 M16 54 L28 53 M64 48 L52 49 M64 54 L52 53" stroke="var(--tertiary)" stroke-width="2" stroke-linecap="round" />
+        </svg>`;
+      }
+      if (animalKey === `cachorro`) {
+        return `<svg viewBox="0 0 80 80" aria-hidden="true">
+          <ellipse cx="18" cy="44" rx="8" ry="16" fill="var(--wood-brown)" />
+          <ellipse cx="62" cy="44" rx="8" ry="16" fill="var(--wood-brown)" />
+          <circle cx="40" cy="44" r="21" fill="var(--surface-container-high)" stroke="var(--wood-brown)" stroke-width="2.5" />
+          <circle cx="32" cy="40" r="3" fill="var(--on-surface)" />
+          <circle cx="48" cy="40" r="3" fill="var(--on-surface)" />
+          <ellipse cx="40" cy="48" rx="5" ry="3.5" fill="var(--wood-dark)" />
+          <path d="M35 54 Q40 58 45 54" fill="none" stroke="var(--wood-dark)" stroke-width="2.2" stroke-linecap="round" />
+        </svg>`;
+      }
+      if (animalKey === `peixe`) {
+        return `<svg viewBox="0 0 80 80" aria-hidden="true">
+          <polygon points="56,40 72,26 72,54" fill="var(--water-blue)" stroke="var(--need-agua)" stroke-width="2.2" />
+          <ellipse cx="36" cy="40" rx="22" ry="14" fill="var(--water-light)" stroke="var(--need-agua)" stroke-width="2.5" />
+          <circle cx="24" cy="37" r="3" fill="var(--on-surface)" />
+          <path d="M34 32 Q39 40 34 48" fill="none" stroke="var(--need-agua)" stroke-width="2.2" stroke-linecap="round" />
+        </svg>`;
+      }
+      if (animalKey === `passaro`) {
+        return `<svg viewBox="0 0 80 80" aria-hidden="true">
+          <ellipse cx="42" cy="46" rx="18" ry="14" fill="var(--petal-gold)" stroke="var(--tertiary)" stroke-width="2.2" />
+          <circle cx="28" cy="33" r="11" fill="var(--petal-gold)" stroke="var(--tertiary)" stroke-width="2.2" />
+          <polygon points="17,32 10,36 18,38" fill="var(--sun-orange)" />
+          <circle cx="25" cy="31" r="2.5" fill="var(--on-surface)" />
+          <path d="M38 44 Q50 38 56 48 Q46 54 38 44 Z" fill="var(--tertiary-container)" stroke="var(--tertiary)" stroke-width="1.8" />
+        </svg>`;
+      }
+      if (animalKey === `borboleta`) {
+        return `<svg viewBox="0 0 80 80" aria-hidden="true">
+          <ellipse cx="26" cy="33" rx="14" ry="11" fill="var(--flower-coral)" stroke="var(--nao-bg)" stroke-width="2" />
+          <ellipse cx="54" cy="33" rx="14" ry="11" fill="var(--flower-coral)" stroke="var(--nao-bg)" stroke-width="2" />
+          <ellipse cx="28" cy="51" rx="11" ry="9" fill="var(--petal-gold)" stroke="var(--tertiary)" stroke-width="2" />
+          <ellipse cx="52" cy="51" rx="11" ry="9" fill="var(--petal-gold)" stroke="var(--tertiary)" stroke-width="2" />
+          <rect x="37" y="24" width="6" height="36" rx="3" fill="var(--on-surface)" />
+        </svg>`;
+      }
+      return `<svg viewBox="0 0 80 80" aria-hidden="true">
+        <path d="M18 50 C18 28, 62 28, 62 50 Z" fill="var(--leaf-mid)" stroke="var(--leaf-dark)" stroke-width="2.5" />
+        <circle cx="66" cy="46" r="7" fill="var(--leaf-light)" stroke="var(--leaf-dark)" stroke-width="2" />
+        <rect x="22" y="50" width="9" height="10" rx="3" fill="var(--leaf-light)" />
+        <rect x="49" y="50" width="9" height="10" rx="3" fill="var(--leaf-light)" />
+      </svg>`;
+    }
+
+    function renderQuiz() {
+      const challenge = QUIZ_CHALLENGES[appState.quizIndex % QUIZ_CHALLENGES.length];
+      const badgeEl = document.getElementById(`quiz-category-badge`);
+      const stepEl = document.getElementById(`quiz-step-label`);
+      const qEl = document.getElementById(`quiz-question-text`);
+      const optsEl = document.getElementById(`quiz-options`);
+      const scoreEl = document.getElementById(`quiz-score-pill`);
+      const fbEl = document.getElementById(`quiz-feedback`);
+
+      if (badgeEl) badgeEl.textContent = challenge.category;
+      if (stepEl) stepEl.textContent = `Desafio ` + String((appState.quizIndex % QUIZ_CHALLENGES.length) + 1) + ` de ` + String(QUIZ_CHALLENGES.length);
+      if (qEl) qEl.textContent = challenge.question;
+      if (scoreEl) scoreEl.textContent = `Acertos hoje: ` + String(appState.quizSolvedToday);
+      if (fbEl) {
+        fbEl.className = `quiz-feedback`;
+        fbEl.innerHTML = `<span>Toque na resposta certa com tranquilidade.</span>`;
+      }
+
+      if (!optsEl) return;
+      optsEl.innerHTML = ``;
+      challenge.options.forEach(function(opt, idx) {
+        const btn = document.createElement(`button`);
+        btn.type = `button`;
+        btn.className = `quiz-option-btn`;
+        btn.setAttribute(`aria-label`, opt.label);
+        btn.onclick = function() { answerQuizOption(idx, btn); };
+
+        if (opt.type === `color`) {
+          const swatch = document.createElement(`span`);
+          swatch.className = `quiz-swatch`;
+          swatch.style.backgroundColor = opt.value;
+          btn.appendChild(swatch);
+        } else if (opt.type === `math`) {
+          const num = document.createElement(`span`);
+          num.className = `quiz-math-num`;
+          num.textContent = opt.value;
+          btn.appendChild(num);
+        } else if (opt.type === `animal`) {
+          const box = document.createElement(`span`);
+          box.className = `quiz-visual-box`;
+          box.innerHTML = getAnimalSvg(opt.value);
+          btn.appendChild(box);
+        }
+
+        const lbl = document.createElement(`span`);
+        lbl.className = `quiz-option-label`;
+        lbl.textContent = opt.label;
+        btn.appendChild(lbl);
+        optsEl.appendChild(btn);
+      });
+    }
+
+    function speakCurrentQuizQuestion() {
+      const challenge = QUIZ_CHALLENGES[appState.quizIndex % QUIZ_CHALLENGES.length];
+      speakText(`Meu teste diário. ` + challenge.question);
+    }
+
+    function answerQuizOption(optionIndex, btnEl) {
+      const challenge = QUIZ_CHALLENGES[appState.quizIndex % QUIZ_CHALLENGES.length];
+      const opt = challenge.options[optionIndex];
+      const fbEl = document.getElementById(`quiz-feedback`);
+      const scoreEl = document.getElementById(`quiz-score-pill`);
+      const allBtns = document.querySelectorAll(`.quiz-option-btn`);
+      allBtns.forEach(function(b) { b.classList.remove(`is-correct`, `is-try`); });
+
+      if (opt && opt.correct) {
+        if (btnEl) btnEl.classList.add(`is-correct`);
+        appState.quizSolvedToday += 1;
+        if (scoreEl) scoreEl.textContent = `Acertos hoje: ` + String(appState.quizSolvedToday);
+        const cheer = `Parabéns, Nena! Você acertou!`;
+        if (fbEl) {
+          fbEl.className = `quiz-feedback is-celebrate`;
+          fbEl.innerHTML = `<span>★ ` + cheer + `</span>`;
+        }
+        speakText(cheer);
+        addLogEntry(`Teste Diário`, `Acertou: "` + challenge.question + `" (` + opt.label + `)`);
+        persistState();
+      } else {
+        if (btnEl) btnEl.classList.add(`is-try`);
+        const retryMsg = `Quase! Vamos tentar a outra opção, com calma.`;
+        if (fbEl) {
+          fbEl.className = `quiz-feedback is-gentle-retry`;
+          fbEl.innerHTML = `<span>` + retryMsg + `</span>`;
+        }
+        speakText(retryMsg);
+      }
+    }
+
+    function nextQuizChallenge() {
+      appState.quizIndex = (appState.quizIndex + 1) % QUIZ_CHALLENGES.length;
+      renderQuiz();
+      speakCurrentQuizQuestion();
+      persistState();
+    }
+
+    /* Santo Terço */
+    function updateMysteryOfTheDay() {
+      const day = new Date().getDay();
+      const map = {
+        0: `Mistérios Gloriosos (Domingo)`,
+        1: `Mistérios Gozosos (Segunda-feira)`,
+        2: `Mistérios Dolorosos (Terça-feira)`,
+        3: `Mistérios Gloriosos (Quarta-feira)`,
+        4: `Mistérios Luminosos (Quinta-feira)`,
+        5: `Mistérios Dolorosos (Sexta-feira)`,
+        6: `Mistérios Gozosos (Sábado)`
+      };
+      const nameEl = document.getElementById(`mystery-name`);
+      if (nameEl) nameEl.textContent = map[day] || `Mistérios do Dia`;
+    }
+
+    function renderRosary() {
+      const beadsEl = document.getElementById(`rosary-beads`);
+      const progEl = document.getElementById(`rosary-progress-text`);
+      const textEl = document.getElementById(`prayer-text-box`);
+      const playBtn = document.getElementById(`rosary-play-btn`);
+      const playLbl = document.getElementById(`rosary-play-label`);
+
+      const current = ROSARY_SEQUENCE[appState.rosaryStep] || ROSARY_SEQUENCE[0];
+      if (progEl) {
+        if (appState.rosaryStep >= 2 && appState.rosaryStep <= 11) {
+          progEl.textContent = `Ave Maria ` + String(appState.rosaryStep - 1) + ` de 10`;
+        } else {
+          progEl.textContent = current.prayer.title;
+        }
+      }
+      if (textEl) textEl.textContent = current.prayer.text;
+
+      if (playBtn) playBtn.classList.toggle(`is-stop`, prayingRosary);
+      if (playLbl) playLbl.textContent = prayingRosary ? `Pausar terço` : `Rezar o terço`;
+
+      if (!beadsEl) return;
+      beadsEl.innerHTML = ``;
+      ROSARY_SEQUENCE.forEach(function(item, idx) {
+        const b = document.createElement(`button`);
+        b.type = `button`;
+        b.className = `bead-btn` + (item.isLarge ? ` is-large-bead` : ``) + (idx < appState.rosaryStep ? ` is-done` : ``) + (idx === appState.rosaryStep ? ` is-current` : ``);
+        b.textContent = item.label;
+        b.setAttribute(`aria-label`, item.prayer.title + ` (` + item.label + `)`);
+        b.onclick = function() { jumpToRosaryBead(idx); };
+        beadsEl.appendChild(b);
+      });
+    }
+
+    function jumpToRosaryBead(idx) {
+      stopRosarySpeech();
+      appState.rosaryStep = idx;
+      renderRosary();
+      const current = ROSARY_SEQUENCE[appState.rosaryStep];
+      if (current) speakText(current.prayer.text);
+      persistState();
+    }
+
+    function stepRosaryBead() {
+      stopRosarySpeech();
+      appState.rosaryStep = (appState.rosaryStep + 1) % ROSARY_SEQUENCE.length;
+      renderRosary();
+      const current = ROSARY_SEQUENCE[appState.rosaryStep];
+      if (current) speakText(current.prayer.text);
+      persistState();
+    }
+
+    function resetRosary() {
+      stopRosarySpeech();
+      appState.rosaryStep = 0;
+      renderRosary();
+      persistState();
+    }
+
+    function stopRosarySpeech() {
+      rosaryStopFlag = true;
+      prayingRosary = false;
+      if (typeof window !== `undefined` && `speechSynthesis` in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function toggleRosaryPrayer() {
+      if (prayingRosary) {
+        stopRosarySpeech();
+        renderRosary();
+        return;
+      }
+      rosaryStopFlag = false;
+      prayingRosary = true;
+      addLogEntry(`Santo Terço`, `Iniciou oração do Santo Terço`);
+      renderRosary();
+      playRosaryFrom(appState.rosaryStep);
+    }
+
+    function playRosaryFrom(stepIdx) {
+      if (rosaryStopFlag || stepIdx >= ROSARY_SEQUENCE.length) {
+        prayingRosary = false;
+        if (stepIdx >= ROSARY_SEQUENCE.length) {
+          appState.rosaryStep = 0;
+        }
+        renderRosary();
+        persistState();
+        return;
+      }
+      appState.rosaryStep = stepIdx;
+      renderRosary();
+      const item = ROSARY_SEQUENCE[stepIdx];
+      speakText(item.prayer.text, function() {
+        if (!rosaryStopFlag) {
+          playRosaryFrom(stepIdx + 1);
+        }
+      });
+    }
+
+    /* Plantas */
+    function getPlantSvg(plantId) {
+      if (plantId === `bromelia`) {
+        return `<svg viewBox="0 0 180 140" aria-hidden="true">
+          <polygon points="62,98 118,98 110,134 70,134" fill="var(--plant-pot)" stroke="var(--plant-pot-dark)" stroke-width="2" />
+          <rect x="57" y="90" width="66" height="10" rx="4" fill="var(--plant-pot)" stroke="var(--plant-pot-dark)" stroke-width="2" />
+          <path d="M90 90 C68 82, 42 74, 30 56 C52 60, 74 72, 90 88 Z" fill="var(--leaf-dark)" />
+          <path d="M90 90 C112 82, 138 74, 150 56 C128 60, 106 72, 90 88 Z" fill="var(--leaf-dark)" />
+          <path d="M90 88 C68 70, 52 50, 48 34 C66 44, 80 62, 90 84 Z" fill="var(--leaf-mid)" />
+          <path d="M90 88 C112 70, 128 50, 132 34 C114 44, 100 62, 90 84 Z" fill="var(--leaf-mid)" />
+          <path d="M90 84 L82 40 L90 16 L98 40 Z" fill="var(--flower-coral)" stroke="var(--nao-bg)" stroke-width="1.5" />
+          <path d="M84 52 L72 34 L88 42 Z" fill="var(--petal-pink)" />
+          <path d="M96 52 L108 34 L92 42 Z" fill="var(--petal-pink)" />
+        </svg>`;
+      }
+      if (plantId === `orquidea`) {
+        return `<svg viewBox="0 0 180 140" aria-hidden="true">
+          <polygon points="64,98 116,98 109,134 71,134" fill="var(--porcelain)" stroke="var(--outline)" stroke-width="2" />
+          <ellipse cx="72" cy="88" rx="18" ry="7" transform="rotate(-18 72 88)" fill="var(--leaf-dark)" />
+          <ellipse cx="108" cy="88" rx="18" ry="7" transform="rotate(18 108 88)" fill="var(--leaf-dark)" />
+          <path d="M90 94 Q88 52 104 22" fill="none" stroke="var(--leaf-mid)" stroke-width="3.5" stroke-linecap="round" />
+          <g transform="translate(102, 26)">
+            <circle cx="-10" cy="0" r="8" fill="var(--petal-violet)" />
+            <circle cx="10" cy="0" r="8" fill="var(--petal-violet)" />
+            <circle cx="0" cy="-9" r="8" fill="var(--blouse-lilac)" />
+            <circle cx="0" cy="6" r="5" fill="var(--petal-gold)" />
+          </g>
+          <g transform="translate(88, 52)">
+            <circle cx="-9" cy="0" r="7" fill="var(--petal-violet)" />
+            <circle cx="9" cy="0" r="7" fill="var(--petal-violet)" />
+            <circle cx="0" cy="-8" r="7" fill="var(--blouse-lilac)" />
+            <circle cx="0" cy="5" r="4.5" fill="var(--petal-gold)" />
+          </g>
+        </svg>`;
+      }
+      if (plantId === `samambaia`) {
+        return `<svg viewBox="0 0 180 140" aria-hidden="true">
+          <polygon points="64,94 116,94 109,132 71,132" fill="var(--plant-pot)" stroke="var(--plant-pot-dark)" stroke-width="2" />
+          <path d="M90 92 Q58 60 32 78" fill="none" stroke="var(--leaf-dark)" stroke-width="3" stroke-linecap="round" />
+          <path d="M90 92 Q64 38 46 32" fill="none" stroke="var(--leaf-mid)" stroke-width="3" stroke-linecap="round" />
+          <path d="M90 92 Q90 30 90 16" fill="none" stroke="var(--leaf-light)" stroke-width="3" stroke-linecap="round" />
+          <path d="M90 92 Q116 38 134 32" fill="none" stroke="var(--leaf-mid)" stroke-width="3" stroke-linecap="round" />
+          <path d="M90 92 Q122 60 148 78" fill="none" stroke="var(--leaf-dark)" stroke-width="3" stroke-linecap="round" />
+          <circle cx="48" cy="66" r="8" fill="var(--leaf-light)" />
+          <circle cx="66" cy="48" r="9" fill="var(--leaf-mid)" />
+          <circle cx="90" cy="36" r="10" fill="var(--leaf-light)" />
+          <circle cx="114" cy="48" r="9" fill="var(--leaf-mid)" />
+          <circle cx="132" cy="66" r="8" fill="var(--leaf-light)" />
+          <circle cx="72" cy="70" r="9" fill="var(--leaf-dark)" />
+          <circle cx="108" cy="70" r="9" fill="var(--leaf-dark)" />
+        </svg>`;
+      }
+      return `<svg viewBox="0 0 180 140" aria-hidden="true">
+        <polygon points="64,98 116,98 109,134 71,134" fill="var(--plant-pot)" stroke="var(--plant-pot-dark)" stroke-width="2" />
+        <line x1="90" y1="98" x2="90" y2="46" stroke="var(--leaf-dark)" stroke-width="5" stroke-linecap="round" />
+        <ellipse cx="75" cy="78" rx="14" ry="7" transform="rotate(-24 75 78)" fill="var(--leaf-mid)" />
+        <ellipse cx="105" cy="72" rx="14" ry="7" transform="rotate(24 105 72)" fill="var(--leaf-mid)" />
+        <g transform="translate(90, 40)">
+          <circle cx="0" cy="-20" r="8" fill="var(--petal-gold)" />
+          <circle cx="14" cy="-14" r="8" fill="var(--petal-gold)" />
+          <circle cx="20" cy="0" r="8" fill="var(--petal-gold)" />
+          <circle cx="14" cy="14" r="8" fill="var(--petal-gold)" />
+          <circle cx="0" cy="20" r="8" fill="var(--petal-gold)" />
+          <circle cx="-14" cy="14" r="8" fill="var(--petal-gold)" />
+          <circle cx="-20" cy="0" r="8" fill="var(--petal-gold)" />
+          <circle cx="-14" cy="-14" r="8" fill="var(--petal-gold)" />
+          <circle cx="0" cy="0" r="13" fill="var(--wood-brown)" stroke="var(--wood-dark)" stroke-width="2" />
+        </g>
+      </svg>`;
+    }
+
+    function getDayPlantIndex() {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 0);
+      const doy = Math.floor((now.getTime() - start.getTime()) / 86400000);
+      return doy % PLANTS_DATA.length;
+    }
+
+    function renderPlants() {
+      const tabsEl = document.getElementById(`plant-tabs`);
+      const artEl = document.getElementById(`plant-art-wrap`);
+      const nameEl = document.getElementById(`plant-name`);
+      const factEl = document.getElementById(`plant-fact`);
+      const lightEl = document.getElementById(`plant-light`);
+      const waterEl = document.getElementById(`plant-water`);
+      const statusEl = document.getElementById(`plant-speak-status`);
+
+      const dayIdx = getDayPlantIndex();
+      const idx = appState.selectedPlantIndex % PLANTS_DATA.length;
+      const plant = PLANTS_DATA[idx];
+
+      if (tabsEl) {
+        tabsEl.innerHTML = ``;
+        PLANTS_DATA.forEach(function(p, i) {
+          const btn = document.createElement(`button`);
+          btn.type = `button`;
+          btn.className = `plant-tab-btn`;
+          btn.setAttribute(`role`, `tab`);
+          btn.setAttribute(`aria-selected`, i === idx ? `true` : `false`);
+          btn.textContent = p.name;
+          btn.onclick = function() { selectPlant(i); };
+          tabsEl.appendChild(btn);
+        });
+      }
+
+      if (artEl) {
+        const dayBadge = idx === dayIdx ? `<span class="plant-day-badge">Planta do dia</span>` : ``;
+        artEl.innerHTML = dayBadge + getPlantSvg(plant.id);
+      }
+      if (nameEl) nameEl.textContent = plant.name;
+      if (factEl) factEl.textContent = plant.fact;
+      if (lightEl) lightEl.textContent = plant.light;
+      if (waterEl) waterEl.textContent = plant.water;
+      if (statusEl) statusEl.textContent = `Ouvir curiosidade`;
+    }
+
+    function selectPlant(index) {
+      appState.selectedPlantIndex = index;
+      renderPlants();
+      persistState();
+    }
+
+    function speakSelectedPlant() {
+      const plant = PLANTS_DATA[appState.selectedPlantIndex % PLANTS_DATA.length];
+      const statusEl = document.getElementById(`plant-speak-status`);
+      if (statusEl) statusEl.textContent = `Ouvindo…`;
+      speakText(plant.fact, function() {
+        if (statusEl) statusEl.textContent = `Ouvir curiosidade`;
+      });
+    }
+
+    /* Pedidos e Respostas Recentes */
+    function renderLogs() {
+      const listEl = document.getElementById(`log-list`);
+      if (!listEl) return;
+      listEl.innerHTML = ``;
+
+      if (!appState.logs || appState.logs.length === 0) {
+        const empty = document.createElement(`li`);
+        empty.className = `log-empty`;
+        empty.innerHTML = `<strong>Nenhum registro ainda hoje.</strong><br>Quando a Nena tocar em <em>Eu preciso de…</em> ou em <em>SIM / NÃO</em>, o pedido aparecerá aqui com o horário.`;
+        listEl.appendChild(empty);
+        return;
+      }
+
+      appState.logs.forEach(function(entry) {
+        const li = document.createElement(`li`);
+        li.className = `log-item` + (entry.confirmed ? ` is-confirmed` : ``);
+
+        const main = document.createElement(`div`);
+        main.className = `log-item-main`;
+
+        const t = document.createElement(`span`);
+        t.className = `log-time`;
+        t.textContent = entry.time;
+
+        const c = document.createElement(`span`);
+        c.className = `log-cat`;
+        c.textContent = entry.category;
+
+        const txt = document.createElement(`span`);
+        txt.className = `log-text`;
+        txt.textContent = entry.text;
+
+        main.appendChild(t);
+        main.appendChild(c);
+        main.appendChild(txt);
+
+        const right = document.createElement(`div`);
+        right.style.display = `flex`;
+        right.style.alignItems = `center`;
+        right.style.gap = `var(--space-sm)`;
+
+        const st = document.createElement(`span`);
+        st.className = `log-status` + (entry.confirmed ? ` is-ok` : ``);
+        st.textContent = entry.confirmed ? (`Confirmado ` + entry.confirmedAt) : `Aguardando`;
+        right.appendChild(st);
+
+        if (!entry.confirmed) {
+          const singleBtn = document.createElement(`button`);
+          singleBtn.type = `button`;
+          singleBtn.className = `btn-secondary`;
+          singleBtn.style.minHeight = `34px`;
+          singleBtn.style.padding = `4px 10px`;
+          singleBtn.style.fontSize = `0.8rem`;
+          singleBtn.textContent = `Atendido`;
+          singleBtn.onclick = function() { confirmSingleLog(entry.id); };
+          right.appendChild(singleBtn);
+        }
+
+        li.appendChild(main);
+        li.appendChild(right);
+        listEl.appendChild(li);
+      });
+    }
+
+    function confirmSingleLog(id) {
+      const nowStr = formatNowTime();
+      appState.logs = appState.logs.map(function(entry) {
+        if (entry.id === id && !entry.confirmed) {
+          return Object.assign({}, entry, { confirmed: true, confirmedAt: nowStr });
+        }
+        return entry;
+      });
+      renderLogs();
+      persistState();
+    }
+
+    function confirmPendingLogs() {
+      const nowStr = formatNowTime();
+      let changed = false;
+      appState.logs = appState.logs.map(function(entry) {
+        if (!entry.confirmed) {
+          changed = true;
+          return Object.assign({}, entry, { confirmed: true, confirmedAt: nowStr });
+        }
+        return entry;
+      });
+      if (changed) {
+        renderLogs();
+        persistState();
+        speakText(`Pedidos confirmados.`);
+      }
+    }
+
+    function clearLogs(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `Toque novamente para limpar`;
+        setTimeout(function() {
+          if (btn.dataset.armed === `true`) {
+            btn.dataset.armed = `false`;
+            btn.textContent = `Limpar Registros`;
+          }
+        }, 4000);
+        return;
+      }
+      btn.dataset.armed = `false`;
+      btn.textContent = `Limpar Registros`;
+      appState.logs = [];
+      renderLogs();
+      persistState();
+    }
+
+    function exportLogsCsv() {
+      const header = `Horario,Categoria,Registro,Status\n`;
+      const rows = (appState.logs || []).map(function(e) {
+        const cleanText = String(e.text).replace(/"/g, `""`);
+        const status = e.confirmed ? (`Confirmado ` + e.confirmedAt) : `Aguardando`;
+        return `"` + e.time + `","` + e.category + `","` + cleanText + `","` + status + `"`;
+      }).join(`\n`);
+      const csv = header + rows;
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        window.notebookAppApi.triggerFileDownload({
+          content: csv,
+          contentType: `text/csv`,
+          encoding: `UTF-8`,
+          filename: `nena-registros.csv`
+        });
+      }
+    }
+
+    /* Caregiver Modal */
+    function openCaregiverModal() {
+      const modal = document.getElementById(`caregiver-modal`);
+      if (modal) {
+        modal.classList.add(`is-open`);
+      }
+    }
+
+    function closeCaregiverModal() {
+      const modal = document.getElementById(`caregiver-modal`);
+      if (modal) {
+        modal.classList.remove(`is-open`);
+      }
+    }
+
+    function handleModalBackdropClick(event) {
+      if (event && event.target && event.target.id === `caregiver-modal`) {
+        closeCaregiverModal();
+      }
+    }
+
+    document.addEventListener(`keydown`, function(e) {
+      if (e.key === `Escape`) closeCaregiverModal();
+    });
+
+    /* Initialization */
+    async function initApp() {
+      appState.selectedPlantIndex = getDayPlantIndex();
+
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && typeof saved === `object`) {
+            if (typeof saved.voiceEnabled === `boolean`) appState.voiceEnabled = saved.voiceEnabled;
+            if (typeof saved.lastMessage === `string` && saved.lastMessage) appState.lastMessage = saved.lastMessage;
+            if (typeof saved.quizIndex === `number`) appState.quizIndex = saved.quizIndex;
+            if (typeof saved.quizSolvedToday === `number`) appState.quizSolvedToday = saved.quizSolvedToday;
+            if (typeof saved.rosaryStep === `number`) appState.rosaryStep = saved.rosaryStep;
+            if (typeof saved.selectedPlantIndex === `number`) appState.selectedPlantIndex = saved.selectedPlantIndex;
+            if (Array.isArray(saved.logs)) appState.logs = saved.logs;
+          }
+        }
+      } catch (err) {
+        // Proceed with defaults
+      }
+
+      if (typeof window !== `undefined` && `speechSynthesis` in window) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.addEventListener(`voiceschanged`, pickBestVoice);
+      }
+
+      renderVoiceButton();
+      updateSpokenBanner(appState.lastMessage);
+      renderQuiz();
+      updateMysteryOfTheDay();
+      renderRosary();
+      renderPlants();
+      renderLogs();
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    initApp();
+  </script>
+</body>
+</html>
